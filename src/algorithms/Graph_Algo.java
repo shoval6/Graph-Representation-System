@@ -69,7 +69,7 @@ public class Graph_Algo implements graph_algorithms{
 	
 	// here we do only two DFS.
 	// after the first DFS traversal we check if we have visted all the nodes. if not return false.
-	// then we reverse the graph directions , abd run the second DFS traversal and check the nodes again.
+	// then we reverse the graph directions , and run the second DFS traversal and check the nodes again.
 	//  
 	@Override
 	public boolean isConnected() {
@@ -129,7 +129,7 @@ public class Graph_Algo implements graph_algorithms{
 	
 	public void dijkstra(int src){
 		PriorityQueue<node_data> queue = new PriorityQueue<>((lhs, rhs) -> 
-															Double.compare(lhs.getWeight(), rhs.getWeight()));
+											   Double.compare(lhs.getWeight(), rhs.getWeight()));
 		Iterator it = this.algo.getV().iterator();
 		initNodeWeightToInfinit(this.algo);
 		node_data n = this.algo.getNode(src);
@@ -156,7 +156,10 @@ public class Graph_Algo implements graph_algorithms{
 
 	@Override
 	public double shortestPathDist(int src, int dest) {
-		return null;
+		dijkstra(src);
+		double res = this.algo.getNode(dest).getWeight();
+		if(res == Double.MAX_VALUE) return -1;
+		return res;
 	}
 
 	@Override
