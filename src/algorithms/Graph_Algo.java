@@ -7,6 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Iterator;
 import java.util.List;
+import java.util.PriorityQueue;
 
 import dataStructure.DGraph;
 import dataStructure.edge_data;
@@ -65,21 +66,25 @@ public class Graph_Algo implements graph_algorithms{
 			System.out.println("IOException is caught");
 		}
 	}
-
+	
+	// here we do only two DFS.
+	// after the first DFS traversal we check if we have visted all the nodes. if not return false.
+	// then we reverse the graph directions , abd run the second DFS traversal and check the nodes again.
+	//  
 	@Override
 	public boolean isConnected() {
 		graph graph = this.copy();
 		Iterator it = graph.getV().iterator();
 		node_data node = (node_data) it.next();
-		DFS(graph,node);
+		DFS(graph,node); // first DFS 
 		it = graph.getV().iterator();
 		while(it.hasNext()){
 			node = (node_data) it.next();
 			if(node.getTag() == 0) return false;
 		}
-		initNodeTag(graph);
-		reverseGraph(graph);
-		DFS(graph,node);
+		initNodeTag(graph); // initial the nodes as unvisited
+		reverseGraph(graph); // reverse graph directions.
+		DFS(graph,node); // second DFS
 		it = graph.getV().iterator();
 		while(it.hasNext()){
 			node = (node_data) it.next();
@@ -122,11 +127,36 @@ public class Graph_Algo implements graph_algorithms{
 		}
 	}
 	
+	public void dijkstra(int src){
+		PriorityQueue<node_data> queue = new PriorityQueue<>((lhs, rhs) -> 
+															Double.compare(lhs.getWeight(), rhs.getWeight()));
+		Iterator it = this.algo.getV().iterator();
+		initNodeWeightToInfinit(this.algo);
+		node_data n = this.algo.getNode(src);
+		n.setWeight(0);
+		n.setTag(1);
+		queue.add(n);
+		
+		while(!queue.isEmpty()){
+			n = queue.poll();
+			it = this.algo.getE(n.getKey()).iterator();
+			while(it.hasNext()){
+				edge_data e = (edge_data) it.next();
+				node_data nodeSrc = this.algo.getNode(e.getDest());
+				if(e.getTag() != 1 && (n.getWeight() + e.getWeight()) < nodeSrc.getWeight()){
+					nodeSrc.setWeight(n.getWeight() + e.getWeight());
+					nodeSrc.setInfo("->"+ n.getKey());
+					queue.add(nodeSrc);
+				}
+			}
+			
+			n.setTag(1);
+		}
+	}
 
 	@Override
 	public double shortestPathDist(int src, int dest) {
-		// TODO Auto-generated method stub
-		return 0;
+		return null;
 	}
 
 	@Override
@@ -152,6 +182,14 @@ public class Graph_Algo implements graph_algorithms{
 		while(it.hasNext()){
 			node_data node = (node_data) it.next();
 			node.setTag(0);
+		}
+	}
+	
+	public void initNodeWeightToInfinit(graph g){
+		Iterator it = g.getV().iterator();
+		while(it.hasNext()){
+			node_data node = (node_data) it.next();
+			node.setWeight(Double.MAX_VALUE);
 		}
 	}
 	
