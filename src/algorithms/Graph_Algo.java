@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
 
@@ -129,8 +130,8 @@ public class Graph_Algo implements graph_algorithms{
 	
 	public void dijkstra(int src){
 		PriorityQueue<node_data> queue = new PriorityQueue<>((lhs, rhs) -> 
-											   Double.compare(lhs.getWeight(), rhs.getWeight()));
-		Iterator it = this.algo.getV().iterator();
+						 Double.compare(lhs.getWeight(), rhs.getWeight()));
+		Iterator it;
 		initNodeWeightToInfinit(this.algo);
 		node_data n = this.algo.getNode(src);
 		n.setWeight(0);
@@ -145,7 +146,7 @@ public class Graph_Algo implements graph_algorithms{
 				node_data nodeSrc = this.algo.getNode(e.getDest());
 				if(e.getTag() != 1 && (n.getWeight() + e.getWeight()) < nodeSrc.getWeight()){
 					nodeSrc.setWeight(n.getWeight() + e.getWeight());
-					nodeSrc.setInfo("->"+ n.getKey());
+					nodeSrc.setInfo("+n.getKey()+");
 					queue.add(nodeSrc);
 				}
 			}
@@ -164,8 +165,24 @@ public class Graph_Algo implements graph_algorithms{
 
 	@Override
 	public List<node_data> shortestPath(int src, int dest) {
-		// TODO Auto-generated method stub
-		return null;
+		double weightRes = shortestPathDist(src, dest);
+		if(weightRes == Double.MAX_VALUE) return null;
+		node_data n = this.algo.getNode(dest);
+		LinkedList<node_data> temp = new LinkedList<>();
+		List<node_data> ans = new LinkedList<>();
+		
+		while(n.getKey() != src){
+			int nodeKey = Integer.parseInt(n.getInfo());
+			temp.add(this.algo.getNode(nodeKey));
+			n = this.algo.getNode(nodeKey);
+		}
+		
+		Iterator it = temp.descendingIterator();
+		while(it.hasNext())
+			ans.add((node_data) it.next());
+		
+		return ans;
+		
 	}
 
 	@Override
