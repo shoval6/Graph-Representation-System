@@ -5,10 +5,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
+import java.util.Set;
 
 import dataStructure.DGraph;
 import dataStructure.edge_data;
@@ -176,6 +178,7 @@ public class Graph_Algo implements graph_algorithms{
 			temp.add(this.algo.getNode(nodeKey));
 			n = this.algo.getNode(nodeKey);
 		}
+		temp.add(this.algo.getNode(src));
 		
 		Iterator it = temp.descendingIterator();
 		while(it.hasNext())
@@ -187,8 +190,21 @@ public class Graph_Algo implements graph_algorithms{
 
 	@Override
 	public List<node_data> TSP(List<Integer> targets) {
-		// TODO Auto-generated method stub
-		return null;
+		Set<node_data> temp = new HashSet<>();
+		List<node_data> pathList = new LinkedList<>();
+		if(targets.size() == 1){
+			pathList.add(this.algo.getNode(targets.get(0)));
+			return pathList;
+		}
+		for(int i=0; i<targets.size()-1; i++){
+			pathList = shortestPath(targets.get(i), targets.get(i+1));
+			if(pathList == null) return null;
+				temp.addAll(pathList);
+			}
+		
+		pathList.addAll(temp);
+		return pathList;
+		
 	}
 
 	@Override
