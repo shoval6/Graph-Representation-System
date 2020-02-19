@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -13,6 +14,8 @@ import java.util.PriorityQueue;
 import java.util.Set;
 
 import dataStructure.DGraph;
+import dataStructure.Edge;
+import dataStructure.Node;
 import dataStructure.edge_data;
 import dataStructure.graph;
 import dataStructure.node_data;
@@ -199,7 +202,7 @@ public class Graph_Algo implements graph_algorithms{
 		for(int i=0; i<targets.size()-1; i++){
 			pathList = shortestPath(targets.get(i), targets.get(i+1));
 			if(pathList == null) return null;
-				temp.addAll(pathList);
+			temp.addAll(pathList);
 			}
 		
 		pathList.addAll(temp);
@@ -209,8 +212,21 @@ public class Graph_Algo implements graph_algorithms{
 
 	@Override
 	public graph copy() {
-		// TODO Auto-generated method stub
-		return null;
+		graph g = new DGraph();
+		for (node_data n : this.algo.getV()) {
+			node_data temp = new Node((Node) n);
+			g.addNode(temp);
+		}
+		for (node_data n : g.getV()) {
+			Collection<edge_data> coll = this.algo.getE(n.getKey());
+			if(coll!=null) {
+				for (edge_data e : this.algo.getE(n.getKey())) {
+					edge_data temp = new Edge((Edge) e);
+					g.connect(temp.getSrc(), temp.getDest(), temp.getWeight());
+				}
+			}
+		}
+		return g;
 	}
 	
 	public void initNodeTag(graph g){
