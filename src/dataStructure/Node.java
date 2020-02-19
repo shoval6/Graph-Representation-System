@@ -19,12 +19,12 @@ public class Node implements node_data {
 		this.location = Point3D.ORIGIN;
 	}
 	
-	public Node(int key) {
-		this.key = key;
+	public Node(Point3D p) {
+		this.key = 0;
 		this.tag = 0;
 		this.weight = 0;
 		this.info = "";
-		this.location = Point3D.ORIGIN;
+		this.location = p;
 	}
 	
 	// copy constructor
@@ -81,7 +81,9 @@ public class Node implements node_data {
 		this.tag = t;
 	}
 
-	
+	public String toString() {
+		return ""+this.getKey();
+	}
 	
 	
 }
