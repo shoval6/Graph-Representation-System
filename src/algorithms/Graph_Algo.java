@@ -102,15 +102,16 @@ public class Graph_Algo implements graph_algorithms{
 	
 	public void DFS(graph g, node_data n){
 		n.setTag(1);
+		if(g.getE(n.getKey()) != null) {
 		Iterator it = g.getE(n.getKey()).iterator();
 		while(it.hasNext()){
 			edge_data edge = (edge_data) it.next();
 			node_data node = g.getNode(edge.getDest());
-			if(node.getTag() == 0){
-				node.setTag(1);
+			if(node.getTag() == 0)
 				DFS(g,node);
+			
 			}
-		}		
+		}
 	}
 	
 	public void reverseGraph(graph gr){
