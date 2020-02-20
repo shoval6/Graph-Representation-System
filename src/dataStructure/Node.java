@@ -8,11 +8,12 @@ public class Node implements node_data {
 	private double weight;
 	private String info;
 	private Point3D location;
+	public static int keyCount = 1;
 	
 	
 	// default constructor
 	public Node(){
-		this.key = 0;
+		this.key = keyCount++;
 		this.tag = 0;
 		this.weight = 0;
 		this.info = "";
@@ -20,7 +21,7 @@ public class Node implements node_data {
 	}
 	
 	public Node(Point3D p) {
-		this.key = 0;
+		this.key = keyCount++;
 		this.tag = 0;
 		this.weight = 0;
 		this.info = "";
