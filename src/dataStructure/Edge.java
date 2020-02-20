@@ -69,6 +69,10 @@ public class Edge implements edge_data {
 		this.tag = t;
 	}
 	
+	public String toString() {
+		return "Src: "+getSrc()+", Dest: "+getDest()+", Weight: "+getWeight();
+	}
+	
 	
 
 }
