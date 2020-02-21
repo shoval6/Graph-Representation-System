@@ -1,14 +1,18 @@
 package dataStructure;
 
+import java.io.Serializable;
+
 import utils.Point3D;
 
-public class Node implements node_data {
+public class Node implements node_data,Serializable {
 
 	private int key,tag;
 	private double weight;
 	private String info;
 	private Point3D location;
 	public static int keyCount = 1;
+	private static final long serialVersionUID = 1L;
+
 	
 	
 	// default constructor

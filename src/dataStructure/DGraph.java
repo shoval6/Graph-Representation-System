@@ -1,16 +1,18 @@
 package dataStructure;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class DGraph implements graph{
+public class DGraph implements graph,Serializable{
 	
 	private int edgesCount , modeCount;
 	private HashMap<Integer,node_data> vertices;
 	private HashMap<Integer,HashMap<Integer,edge_data>> edges;
-	
+	private static final long serialVersionUID = 1L;
+
 	
 	public DGraph(){
 		this.edgesCount = 0;

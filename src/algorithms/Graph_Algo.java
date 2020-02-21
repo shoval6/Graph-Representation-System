@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -25,8 +26,9 @@ import dataStructure.node_data;
  * @author 
  *
  */
-public class Graph_Algo implements graph_algorithms{
-
+public class Graph_Algo implements graph_algorithms,Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	private graph algo;
 	
 	public Graph_Algo(){
