@@ -129,6 +129,7 @@ public class Graph_Algo implements graph_algorithms,Serializable{
 							gr.connect(e.getDest(), e.getSrc(), e.getWeight()); // reverse the edge direction
 							gr.getEdge(e.getDest(), e.getSrc()).setTag(1); // mark current edge as reversed
 							gr.removeEdge(e.getSrc(), e.getDest()); // remove the current edge
+							it2 = gr.getE(n.getKey()).iterator();
 						}
 					}
 				}
