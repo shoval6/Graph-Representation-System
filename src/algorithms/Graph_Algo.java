@@ -157,7 +157,7 @@ public class Graph_Algo implements graph_algorithms,Serializable{
 				node_data nodeSrc = this.algo.getNode(e.getDest());
 				if(e.getTag() != 1 && (n.getWeight() + e.getWeight()) < nodeSrc.getWeight()){
 					nodeSrc.setWeight(n.getWeight() + e.getWeight());
-					nodeSrc.setInfo("+n.getKey()+");
+					nodeSrc.setInfo(String.valueOf(n.getKey()));
 					queue.add(nodeSrc);
 					}
 				}
@@ -168,23 +168,23 @@ public class Graph_Algo implements graph_algorithms,Serializable{
 
 	@Override
 	public double shortestPathDist(int src, int dest) {
+		if(src == dest) return 0;
 		dijkstra(src);
 		double res = this.algo.getNode(dest).getWeight();
-		if(res == Double.MAX_VALUE) return -1;
 		return res;
 	}
 
 	@Override
 	public List<node_data> shortestPath(int src, int dest) {
 		double weightRes = shortestPathDist(src, dest);
-		if(weightRes == Double.MAX_VALUE) return null;
+		if(weightRes == Double.MAX_VALUE || weightRes == 0) return null;
 		node_data n = this.algo.getNode(dest);
 		LinkedList<node_data> temp = new LinkedList<>();
 		List<node_data> ans = new LinkedList<>();
 		
 		while(n.getKey() != src){
+			temp.add(this.algo.getNode(n.getKey()));
 			int nodeKey = Integer.parseInt(n.getInfo());
-			temp.add(this.algo.getNode(nodeKey));
 			n = this.algo.getNode(nodeKey);
 		}
 		temp.add(this.algo.getNode(src));
@@ -199,21 +199,54 @@ public class Graph_Algo implements graph_algorithms,Serializable{
 
 	@Override
 	public List<node_data> TSP(List<Integer> targets) {
-		Set<node_data> temp = new HashSet<>();
+		List<Integer> tempTragets = new LinkedList<>(); 
 		List<node_data> pathList = new LinkedList<>();
+		for (int i = 0; i <targets.size() ; i++)
+			if(!tempTragets.contains(targets.get(i))) tempTragets.add(targets.get(i));
+		
+		targets = tempTragets;
+		
 		if(targets.size() == 1){
 			pathList.add(this.algo.getNode(targets.get(0)));
 			return pathList;
 		}
-		for(int i=0; i<targets.size()-1; i++){
-			pathList = shortestPath(targets.get(i), targets.get(i+1));
-			if(pathList == null) return null;
-			temp.addAll(pathList);
+		
+		int tempSrc = 0;
+		int tempDest = 0;
+		int n1 = targets.get(0);
+		double tempShortestPath = 0;
+		while(!targets.isEmpty()) {
+			double ShortestPath = Double.MAX_VALUE;
+			this.dijkstra(n1);
+			for(int i=0; i<targets.size(); i++) {
+				int n2 = targets.get(i);
+				if(n1 != n2) {
+					double destWeight = this.algo.getNode(n2).getWeight();
+					if(destWeight == Double.MAX_VALUE) return null ;
+					ShortestPath = Math.min(ShortestPath, destWeight);
+					if(ShortestPath != tempShortestPath) {
+						tempSrc = n1;
+						tempDest = n2;
+					}
+				}
 			}
+			
+			List<node_data> tempPath = this.shortestPath(tempSrc, tempDest);
+			for(int j=0; j< tempPath.size(); j++) {
+				node_data node = tempPath.get(j);
+				if (pathList.size() == 0 || pathList.get(pathList.size()-1).getKey()!=node.getKey())
+					pathList.add(node);
+					
+				for (int z = 0; z < targets.size(); z++) {
+					int nodeKey = targets.get(z);
+					if (node.getKey() == nodeKey)
+						targets.remove(z);
+					}
+			}
+			n1 = tempDest;
+		}
 		
-		pathList.addAll(temp);
 		return pathList;
-		
 	}
 
 	@Override
