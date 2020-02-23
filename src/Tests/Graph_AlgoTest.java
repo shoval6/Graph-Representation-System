@@ -369,13 +369,13 @@ class Graph_AlgoTest {
 
 		assertEquals(graph1.isConnected(), graph2.isConnected());
 		assertEquals(graph1.shortestPathDist(nodes[0].getKey(), nodes[5].getKey()),
-		graph2.shortestPathDist(nodes[0].getKey(), nodes[5].getKey()));
+			graph2.shortestPathDist(nodes[0].getKey(), nodes[5].getKey()));
 		
 		dg1.connect(nodes[5].getKey(), nodes[0].getKey(), 2);
 		graph1.init(dg1);
 		
 		assertNotEquals(graph1.shortestPathDist(nodes[5].getKey(), nodes[0].getKey()),
-		graph2.shortestPathDist(nodes[5].getKey(), nodes[0].getKey()));
+			graph2.shortestPathDist(nodes[5].getKey(), nodes[0].getKey()));
 
 	}
 }
