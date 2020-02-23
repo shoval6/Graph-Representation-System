@@ -149,7 +149,9 @@ public class Graph_Algo implements graph_algorithms,Serializable{
 		
 		while(!queue.isEmpty()){
 			n = queue.poll();
-			it = this.algo.getE(n.getKey()).iterator();
+			Collection<edge_data> coll = this.algo.getE(n.getKey());
+			if(coll != null) {
+			it = coll.iterator();
 			while(it.hasNext()){
 				edge_data e = (edge_data) it.next();
 				node_data nodeSrc = this.algo.getNode(e.getDest());
@@ -157,9 +159,9 @@ public class Graph_Algo implements graph_algorithms,Serializable{
 					nodeSrc.setWeight(n.getWeight() + e.getWeight());
 					nodeSrc.setInfo("+n.getKey()+");
 					queue.add(nodeSrc);
+					}
 				}
 			}
-			
 			n.setTag(1);
 		}
 	}
