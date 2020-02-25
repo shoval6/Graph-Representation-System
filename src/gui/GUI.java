@@ -12,6 +12,9 @@ import javax.swing.KeyStroke;
 
 public class GUI extends JFrame implements ActionListener {
 
+	
+	private static final long serialVersionUID = 1L;
+
 	public GUI() {
 		initGUI();
 		initMenu();
@@ -51,7 +54,7 @@ public class GUI extends JFrame implements ActionListener {
 		file.add(save);
 
 		//////////////////
-		//// File Menu ///
+		//// Edit Menu ///
 		//////////////////
 
 		JMenu edit = new JMenu("Edit");
@@ -96,6 +99,31 @@ public class GUI extends JFrame implements ActionListener {
 		menuBar.add(edit);
 		menuBar.add(algorithms);
 
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String stringIdentifier = e.getActionCommand();
+		
+		switch(stringIdentifier) {
+		case "Load": GUIHandler.load();
+		break;
+		case "Save": GUIHandler.save();
+		break;
+		case "Add Node": GUIHandler.addNode();
+		break;
+		case "Add Edge": GUIHandler.addEdge();
+		break;
+		case "isConnected": GUIHandler.isConnected();
+		break;
+		case "shortestPathDist": GUIHandler.shortestPathDist();
+		break;
+		case "shortestPath": GUIHandler.shortestPath();
+		break;
+		case "TSP": GUIHandler.TSP();
+		
+		}
+		
 	}
 
 	public static void main(String[] args) {
