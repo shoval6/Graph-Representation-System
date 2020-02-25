@@ -20,10 +20,12 @@ public class GUI extends JFrame implements ActionListener {
 
 	
 	private static final long serialVersionUID = 1L;
+	private GUIHandler guiHandler;
 
 	public GUI() {
 		initGUI();
 		initMenu();
+		guiHandler = new GUIHandler();
 
 	}
 
@@ -69,7 +71,7 @@ public class GUI extends JFrame implements ActionListener {
 			}
 			g2d.drawString(String.valueOf(index++), x-4, Y_COORD+50);
 		}
-
+	
 	}
 	
 	public void paint(Graphics g) {
@@ -154,21 +156,21 @@ public class GUI extends JFrame implements ActionListener {
 		String stringIdentifier = e.getActionCommand();
 		
 		switch(stringIdentifier) {
-		case "Load": GUIHandler.load();
+		case "Load": guiHandler.load();
 		break;
-		case "Save": GUIHandler.save();
+		case "Save": guiHandler.save();
 		break;
-		case "Add Node": GUIHandler.addNode();
+		case "Add Node": guiHandler.addNode();
 		break;
-		case "Add Edge": GUIHandler.addEdge();
+		case "Add Edge": guiHandler.addEdge();
 		break;
-		case "isConnected": GUIHandler.isConnected();
+		case "isConnected": guiHandler.isConnected();
 		break;
-		case "shortestPathDist": GUIHandler.shortestPathDist();
+		case "shortestPathDist": guiHandler.shortestPathDist();
 		break;
-		case "shortestPath": GUIHandler.shortestPath();
+		case "shortestPath": guiHandler.shortestPath();
 		break;
-		case "TSP": GUIHandler.TSP();
+		case "TSP": guiHandler.TSP();
 		
 		}
 		
