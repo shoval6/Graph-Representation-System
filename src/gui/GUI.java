@@ -1,8 +1,14 @@
 package gui;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.geom.Line2D;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -23,11 +29,53 @@ public class GUI extends JFrame implements ActionListener {
 
 	private void initGUI() {
 		setTitle("Graph-Represenation");
-		setSize(1200, 600);
+		setSize(1400, 800);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
 		setLocationRelativeTo(null);
 	}
+	
+	private void initAxis(Graphics g) {
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.setColor(Color.red);
+		g2d.setStroke(new BasicStroke(4f));
+		g2d.draw(new Line2D.Double(50, 110, 50, 760));
+		g2d.draw(new Line2D.Double(20, 740, 1360, 740));
+		
+		final int X_COORD = 40;
+		final int Y_COORD = 730;
+		int index = 31	;
+		Font f = new Font("Dialog", Font.PLAIN, 18);
+		g.setFont(f);
+		
+		// draw Y-axis
+		for(int y=110; y<740; y=y+20) {
+			g2d.setColor(Color.red);
+			g2d.draw(new Line2D.Double(X_COORD, y, X_COORD+20, y));
+			g2d.setColor(Color.black);
+			g2d.drawString(String.valueOf(index--), X_COORD-30, y+4);
+		}
+		
+		index = 0;
+		
+		// draw X-axis
+		for(int x=60; x<1380; x=x+20) {
+			g2d.setColor(Color.red);
+			g2d.draw(new Line2D.Double(x, Y_COORD, x, Y_COORD+20));
+			g2d.setColor(Color.black);
+			if(index%2 != 0) {
+				index++;
+				continue;
+			}
+			g2d.drawString(String.valueOf(index++), x-4, Y_COORD+50);
+		}
+
+	}
+	
+	public void paint(Graphics g) {
+        super.paint(g);
+        initAxis(g);
+    }
 
 	private void initMenu() {
 
