@@ -12,6 +12,9 @@ import javax.swing.KeyStroke;
 
 public class GUI extends JFrame implements ActionListener {
 
+	public GUI() {
+		
+	}
 	
 	public static void main(String[] args) {
 		GUI gui = new GUI();
