@@ -27,4 +27,10 @@ public class GUIHandler {
 		
 	}
 	
+	public void calcNodePosition(Node node) {
+		double x = X_COORD + (node.getLocation().ix()*20);
+		double y = Y_COORD + (node.getLocation().iy()*20);
+		Point3D point = new Point3D(x,y);
+		node.setLocation(point);
+	}
 }
