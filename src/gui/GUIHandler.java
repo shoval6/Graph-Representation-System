@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 
 import algorithms.Graph_Algo;
 import algorithms.graph_algorithms;
+import dataStructure.DGraph;
 import dataStructure.Node;
 import utils.Point3D;
 
@@ -11,11 +12,14 @@ public class GUIHandler {
 
 	public static GUIHandler guiHandler = new GUIHandler();
 	private graph_algorithms graph;
+	private DGraph g;
 	final int X_COORD = 60;
 	final int Y_COORD = 700;
 	
 	public GUIHandler() {
+		g = new DGraph();
 		graph = new Graph_Algo();
+		graph.init(g);
 	}
 	
 	public void addNode() {
@@ -33,4 +37,9 @@ public class GUIHandler {
 		Point3D point = new Point3D(x,y);
 		node.setLocation(point);
 	}
+	
+	public int getMC() {
+		return this.g.getMC();
+	}
+	
 }
