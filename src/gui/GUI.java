@@ -155,12 +155,26 @@ public class GUI implements ActionListener {
 		addNode.addActionListener(this);
 		KeyStroke addNodeKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK);
 		addNode.setAccelerator(addNodeKeyStroke);
+		
+		JMenuItem removeNode = new JMenuItem("Remove Node");
+		removeNode.addActionListener(this);
 
 		JMenuItem addEdge = new JMenuItem("Add Edge");
 		addEdge.addActionListener(this);
 		KeyStroke addEdgeKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_E, ActionEvent.CTRL_MASK);
 		addEdge.setAccelerator(addEdgeKeyStroke);
+		
+		JMenuItem removeEdge = new JMenuItem("Remove Edge");
+		removeEdge.addActionListener(this);
+		
+		JMenuItem node = new JMenuItem("Node");
+		JMenuItem edge = new JMenuItem("Edge");
+		
 
+		node.add(addNode);
+		node.add(removeNode);
+		edge.add(addEdge);
+		edge.add(removeEdge);
 		edit.add(addNode);
 		edit.add(addEdge);
 
@@ -207,6 +221,10 @@ public class GUI implements ActionListener {
 		break;
 		case "Add Edge": GUIHandler.guiHandler.addEdge();
 		break;
+		case "Remove Node": GUIHandler.guiHandler.removeNode();
+		break;
+//		case "Remove Edge": GUIHandler.guiHandler.removeEdge();
+//		break:
 //		case "isConnected": GUIHandler.guiHandler.isConnected();
 //		break;
 //		case "shortestPathDist": GUIHandler.guiHandler.shortestPathDist();
