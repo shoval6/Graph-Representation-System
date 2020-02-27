@@ -167,16 +167,16 @@ public class GUI implements ActionListener {
 		JMenuItem removeEdge = new JMenuItem("Remove Edge");
 		removeEdge.addActionListener(this);
 		
-		JMenuItem node = new JMenuItem("Node");
-		JMenuItem edge = new JMenuItem("Edge");
+		JMenu node = new JMenu("Node");
+		JMenu edge = new JMenu("Edge");
 		
 
 		node.add(addNode);
 		node.add(removeNode);
 		edge.add(addEdge);
 		edge.add(removeEdge);
-		edit.add(addNode);
-		edit.add(addEdge);
+		edit.add(node);
+		edit.add(node);
 
 		////////////////////////
 		//// Algorithms Menu ///
