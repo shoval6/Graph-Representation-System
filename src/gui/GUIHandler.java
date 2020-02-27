@@ -38,11 +38,21 @@ public class GUIHandler {
 		
 	}
 	
+	
 	public void addEdge() {
 		String nodeSrc = JOptionPane.showInputDialog("Enter node source number");
 		String nodeDest = JOptionPane.showInputDialog("Enter node destination number");
 		String weight = JOptionPane.showInputDialog("Enter weight");
 		graph.connect(Integer.parseInt(nodeSrc), Integer.parseInt(nodeDest), Integer.parseInt(weight));
+	}
+	
+	
+	public void removeNode() {
+		String removed = JOptionPane.showInputDialog("Enter node number");
+		node_data res = graph.removeNode(Integer.parseInt(removed));
+		if(res == null) 
+			JOptionPane.showMessageDialog(null, "The specified node doesn't exist",
+					"Error Messsage",JOptionPane.ERROR_MESSAGE);
 	}
 	
 	public void calcNodePosition(Node node) {
