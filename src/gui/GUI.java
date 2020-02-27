@@ -176,7 +176,7 @@ public class GUI implements ActionListener {
 		edge.add(addEdge);
 		edge.add(removeEdge);
 		edit.add(node);
-		edit.add(node);
+		edit.add(edge);
 
 		////////////////////////
 		//// Algorithms Menu ///
