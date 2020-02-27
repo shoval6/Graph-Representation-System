@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Polygon;
+import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -14,44 +16,43 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
-public class GUI extends JFrame implements ActionListener {
-
+class Panel extends JPanel{
 	
-	private static final long serialVersionUID = 1L;
 	private GUIHandler guiHandler;
-
-	public GUI() {
-		initGUI();
-		initMenu();
+	private Boolean removeFlag; 
+	
+	public Panel() {
 		guiHandler = new GUIHandler();
-
-	}
-
-	private void initGUI() {
-		setTitle("Graph-Represenation");
-		setSize(1400, 800);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setVisible(true);
-		setLocationRelativeTo(null);
+		removeFlag = false;
+		setBackground(Color.WHITE); 
 	}
 	
-	private void initAxis(Graphics g) {
-		Graphics2D g2d = (Graphics2D) g;
+	private Boolean getFlag() {
+		return removeFlag;
+	}
+	
+	public void setFlag(Boolean bool) {
+		this.removeFlag = bool;
+	}
+	
+	private void initAxis(Graphics2D g2d) {
+	
 		g2d.setColor(Color.red);
 		g2d.setStroke(new BasicStroke(4f));
-		g2d.draw(new Line2D.Double(50, 110, 50, 760));
-		g2d.draw(new Line2D.Double(20, 740, 1360, 740));
+		g2d.draw(new Line2D.Double(50, 110, 50, 760)); // Y-axis
+		g2d.draw(new Line2D.Double(20, 740, 1360, 740)); // X-axis
 		
 		final int X_COORD = 40;
 		final int Y_COORD = 730;
-		int index = 31	;
+		int index = 30;
 		Font f = new Font("Dialog", Font.PLAIN, 18);
-		g.setFont(f);
+		g2d.setFont(f);
 		
 		// draw Y-axis
-		for(int y=110; y<740; y=y+20) {
+		for(int y=130; y<740; y=y+20) {
 			g2d.setColor(Color.red);
 			g2d.draw(new Line2D.Double(X_COORD, y, X_COORD+20, y));
 			g2d.setColor(Color.black);
@@ -61,7 +62,7 @@ public class GUI extends JFrame implements ActionListener {
 		index = 0;
 		
 		// draw X-axis
-		for(int x=60; x<1380; x=x+20) {
+		for(int x=60; x<1360; x=x+20) {
 			g2d.setColor(Color.red);
 			g2d.draw(new Line2D.Double(x, Y_COORD, x, Y_COORD+20));
 			g2d.setColor(Color.black);
@@ -69,20 +70,61 @@ public class GUI extends JFrame implements ActionListener {
 				index++;
 				continue;
 			}
-			g2d.drawString(String.valueOf(index++), x-4, Y_COORD+50);
+			g2d.drawString(String.valueOf(index++), x-4, Y_COORD+40);
 		}
 	
+		Polygon poly1 = new Polygon(new int[] {50,45,55},new int[] {100,110,110}, 3);
+		Polygon poly2 = new Polygon(new int[] {1360,1360,1370},new int[] {735,745,740}, 3);
+	
+		g2d.setColor(Color.RED);
+		g2d.drawPolygon(poly1);
+		g2d.drawPolygon(poly2);
+		g2d.fillPolygon(poly1);		
+		g2d.fillPolygon(poly2);
+		g2d.drawString("X", 1374, 748);
+		g2d.drawString("Y", 44, 94);
+
 	}
 	
-	public void paint(Graphics g) {
-        super.paint(g);
-        initAxis(g);
+	public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON); 
+        initAxis(g2d);
+        GUIHandler.guiHandler.draw(g2d);
+        if(getFlag()) {
+        	setBackground(Color.WHITE);
+        	setFlag(false);
+        }
     }
+}
+
+public class GUI implements ActionListener {
+	
+	private JFrame frame;
+	private Panel jpanel;
+	private int modeCount;
+	
+	public GUI() {
+		this.jpanel = new Panel();
+		this.modeCount = GUIHandler.guiHandler.getMC();
+		initFrame();
+		initMenu();
+	}
+	
+	private void initFrame() {
+		this.frame = new JFrame("Graph-Represenation");
+		this.frame.setSize(1400, 800);
+		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.frame.setVisible(true);
+		this.frame.setLocationRelativeTo(null);
+		this.frame.getContentPane().add(jpanel);
+	}
 
 	private void initMenu() {
 
 		JMenuBar menuBar = new JMenuBar();
-		setJMenuBar(menuBar);
+		this.frame.setJMenuBar(menuBar);
 
 		//////////////////
 		//// File Menu ///
@@ -115,7 +157,7 @@ public class GUI extends JFrame implements ActionListener {
 		addNode.setAccelerator(addNodeKeyStroke);
 
 		JMenuItem addEdge = new JMenuItem("Add Edge");
-		addNode.addActionListener(this);
+		addEdge.addActionListener(this);
 		KeyStroke addEdgeKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_E, ActionEvent.CTRL_MASK);
 		addEdge.setAccelerator(addEdgeKeyStroke);
 
@@ -149,6 +191,7 @@ public class GUI extends JFrame implements ActionListener {
 		menuBar.add(edit);
 		menuBar.add(algorithms);
 
+		//return menuBar;
 	}
 	
 	@Override
@@ -156,29 +199,40 @@ public class GUI extends JFrame implements ActionListener {
 		String stringIdentifier = e.getActionCommand();
 		
 		switch(stringIdentifier) {
-		case "Load": guiHandler.load();
+//		case "Load": GUIHandler.guiHandler.load();
+//		break;
+//		case "Save": GUIHandler.guiHandler.save();
+//		break;
+		case "Add Node": GUIHandler.guiHandler.addNode();
 		break;
-		case "Save": guiHandler.save();
+		case "Add Edge": GUIHandler.guiHandler.addEdge();
 		break;
-		case "Add Node": guiHandler.addNode();
-		break;
-		case "Add Edge": guiHandler.addEdge();
-		break;
-		case "isConnected": guiHandler.isConnected();
-		break;
-		case "shortestPathDist": guiHandler.shortestPathDist();
-		break;
-		case "shortestPath": guiHandler.shortestPath();
-		break;
-		case "TSP": guiHandler.TSP();
+//		case "isConnected": GUIHandler.guiHandler.isConnected();
+//		break;
+//		case "shortestPathDist": GUIHandler.guiHandler.shortestPathDist();
+//		break;
+//		case "shortestPath": GUIHandler.guiHandler.shortestPath();
+//		break;
+//		case "TSP": GUIHandler.guiHandler.TSP();
 		
+		
+		}
+				
+		if(modeCount != GUIHandler.guiHandler.getMC()) {
+			modeCount = GUIHandler.guiHandler.getMC();
+			if(stringIdentifier.equals("Remove Node") || stringIdentifier.equals("Remove Edge"))
+				jpanel.setFlag(true);
+				jpanel.repaint();
 		}
 		
 	}
+	
+	
 
 	public static void main(String[] args) {
 		GUI gui = new GUI();
-
+		
+	
 	}
 
 }
