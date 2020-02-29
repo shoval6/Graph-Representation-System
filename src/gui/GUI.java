@@ -209,7 +209,6 @@ public class GUI implements ActionListener {
 		menuBar.add(edit);
 		menuBar.add(algorithms);
 
-		//return menuBar;
 	}
 	
 	@Override
@@ -244,6 +243,10 @@ public class GUI implements ActionListener {
 			modeCount = GUIHandler.guiHandler.getMC();
 			if(stringIdentifier.equals("Remove Node") || stringIdentifier.equals("Remove Edge"))
 				jpanel.setFlag("remove");
+			if(stringIdentifier.equals("shortestPath"))
+				jpanel.setFlag("shortestPath");
+			if(stringIdentifier.equals("TSP"))
+				jpanel.setFlag("TSP");
 				jpanel.repaint();
 		}
 		
