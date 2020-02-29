@@ -91,12 +91,23 @@ public class GUIHandler {
 					"Error Messsage",JOptionPane.ERROR_MESSAGE);
 	}
 	
+	
+	public void removeEdge() {
+		String nodeSrc = JOptionPane.showInputDialog("Enter node source number");
+		String nodeDest = JOptionPane.showInputDialog("Enter node destination number");
+		if(nodeSrc == null || nodeDest == null) return;
+		graph.removeEdge(Integer.parseInt(nodeSrc), Integer.parseInt(nodeDest));
+		
+	}
+	
+	
 	public void calcNodePosition(Node node) {
 		double x = X_COORD + (node.getLocation().ix()*20)-5;
 		double y = Y_COORD - (node.getLocation().iy()*20)+5;
 		Point3D point = new Point3D(x,y);
 		node.setLocation(point);
 	}
+	
 	
 	public int getMC() {
 		return this.graph.getMC();
