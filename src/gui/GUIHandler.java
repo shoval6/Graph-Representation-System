@@ -108,6 +108,8 @@ public class GUIHandler {
 		else
 			JOptionPane.showMessageDialog(null, "The graph is not connected");
 	}
+	
+	
 	public void calcNodePosition(Node node) {
 		double x = X_COORD + (node.getLocation().ix()*20)-5;
 		double y = Y_COORD - (node.getLocation().iy()*20)+5;
