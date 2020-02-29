@@ -18,24 +18,24 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 class Panel extends JPanel{
 	
-	private GUIHandler guiHandler;
-	private Boolean removeFlag; 
+	private String removeFlag; 
 	
 	public Panel() {
-		guiHandler = new GUIHandler();
-		removeFlag = false;
+		removeFlag = null;
 		setBackground(Color.WHITE); 
 	}
 	
-	private Boolean getFlag() {
+	private String getFlag() {
 		return removeFlag;
 	}
 	
-	public void setFlag(Boolean bool) {
-		this.removeFlag = bool;
+	public void setFlag(String str) {
+		this.removeFlag = str;
 	}
 	
 	private void initAxis(Graphics2D g2d) {
@@ -92,9 +92,13 @@ class Panel extends JPanel{
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON); 
         initAxis(g2d);
         GUIHandler.guiHandler.draw(g2d);
-        if(getFlag()) {
+        if(getFlag() != null) {
+        if(getFlag().equals("remove")) 
         	setBackground(Color.WHITE);
-        	setFlag(false);
+        if(getFlag().equals("shortestPath") || getFlag().equals("TSP"))
+        	GUIHandler.guiHandler.drawPath(g2d);
+        setFlag(null);
+        	
         }
     }
 }
@@ -239,7 +243,7 @@ public class GUI implements ActionListener {
 		if(modeCount != GUIHandler.guiHandler.getMC()) {
 			modeCount = GUIHandler.guiHandler.getMC();
 			if(stringIdentifier.equals("Remove Node") || stringIdentifier.equals("Remove Edge"))
-				jpanel.setFlag(true);
+				jpanel.setFlag("remove");
 				jpanel.repaint();
 		}
 		
@@ -248,6 +252,23 @@ public class GUI implements ActionListener {
 	
 
 	public static void main(String[] args) {
+		
+	    try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedLookAndFeelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	     
 		GUI gui = new GUI();
 		
 	
