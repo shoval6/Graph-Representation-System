@@ -85,13 +85,15 @@ public class Graph_Algo implements graph_algorithms,Serializable{
 		Iterator it = graph.getV().iterator();
 		node_data node = (node_data) it.next();
 		DFS(graph,node); // first DFS 
-		it = graph.getV().iterator();
+		it = graph.getV().iterator(); // get the first node
 		while(it.hasNext()){
 			node = (node_data) it.next();
 			if(node.getTag() == 0) return false;
 		}
 		initNodeTag(graph); // initial the nodes as unvisited
 		reverseGraph(graph); // reverse graph directions.
+		it = graph.getV().iterator();
+		node = (node_data) it.next(); // get the first node
 		DFS(graph,node); // second DFS
 		it = graph.getV().iterator();
 		while(it.hasNext()){
