@@ -110,6 +110,15 @@ public class GUIHandler {
 	}
 	
 	
+	public void shortestPathDist() {
+		String nodeSrc = JOptionPane.showInputDialog("Enter node source number");
+		String nodeDest = JOptionPane.showInputDialog("Enter node destination number");
+		double res = graphAlgo.shortestPathDist(Integer.parseInt(nodeSrc), Integer.parseInt(nodeDest));
+		String ans = "The shortest path distance between "+nodeSrc+" -> "+nodeDest+" is : "+res;
+		JOptionPane.showMessageDialog(null, ans);
+	}
+	
+	
 	public void calcNodePosition(Node node) {
 		double x = X_COORD + (node.getLocation().ix()*20)-5;
 		double y = Y_COORD - (node.getLocation().iy()*20)+5;
