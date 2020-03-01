@@ -1,14 +1,19 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.FileDialog;
 import java.awt.Graphics;
+import java.io.File;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.filechooser.FileSystemView;
 
 import algorithms.Graph_Algo;
@@ -18,6 +23,7 @@ import dataStructure.Node;
 import dataStructure.edge_data;
 import dataStructure.node_data;
 import utils.Point3D;
+import utils.StdDraw;
 
 public class GUIHandler {
 
@@ -160,24 +166,28 @@ public class GUIHandler {
 	}
 	
 	
-	public void save() {
-		JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView());
-		jfc.setDialogTitle("Save graph ...");
-		int userSelection = jfc.showSaveDialog(null);
-		if(userSelection == JFileChooser.APPROVE_OPTION) {
-			graphAlgo.save(jfc.getSelectedFile().getAbsolutePath());
+	public void save(JFrame frame) {
+		FileDialog chooser = new FileDialog(frame, "Save graph to file", FileDialog.SAVE);
+		chooser.setVisible(true);
+		String filename = chooser.getFile();
+		if (filename != null) {
+			graphAlgo.save(chooser.getDirectory() + File.separator + chooser.getFile()); 
 			JOptionPane.showMessageDialog(null, "The file saved successfully");
 		}
 	}
 	
 	
-	public void load() {
-		JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView());
-		jfc.setDialogTitle("Load graph ...");
-		int userSelection = jfc.showOpenDialog(null);
-		if(userSelection == JFileChooser.APPROVE_OPTION) {
-			graphAlgo.init(jfc.getSelectedFile().getAbsolutePath());
-		}
+	public void load(JFrame frame) {
+		FileDialog chooser = new FileDialog(frame ,"Load graph from file", FileDialog.LOAD);
+        chooser.setVisible(true);
+        String filename = chooser.getFile();
+        if (filename != null) {
+            Graph_Algo temp = new Graph_Algo();
+            temp.init(chooser.getDirectory() + File.separator + chooser.getFile());
+            graph = (DGraph) temp.copy();
+        	graphAlgo = temp;;
+            
+        }
 	}
 	
 	
