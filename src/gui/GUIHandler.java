@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -127,6 +129,17 @@ public class GUIHandler {
 			JOptionPane.showMessageDialog(null, "There is no path between "+nodeSrc+" -> "+nodeDest);
 	}
 	
+	
+	public void TSP() {
+		String input = JOptionPane.showInputDialog("Please enter a group of points with ',' between each other");
+		String[] split = input.split(",");
+		List<Integer> targets = new LinkedList<>();
+		for(int i=0; i<split.length; i++)
+			targets.add(Integer.parseInt(split[i]));
+		this.coll = graphAlgo.TSP(targets);
+		if(coll == null)
+			JOptionPane.showMessageDialog(null, "There is no path between the nodes");
+	}
 	
 	public void calcNodePosition(Node node) {
 		double x = X_COORD + (node.getLocation().ix()*20)-5;
