@@ -1,8 +1,9 @@
 package gui;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.FileDialog;
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.io.File;
 import java.util.Collection;
 import java.util.Iterator;
@@ -41,15 +42,16 @@ public class GUIHandler {
 		graphAlgo.init(graph);
 	}
 	
-	public void draw(Graphics graphics) {
+	public void draw(Graphics2D graphics) {
 		Iterator it1 = graph.getV().iterator();
 		while(it1.hasNext()) {
 			node_data node = (node_data) it1.next();
 			Point3D src = node.getLocation();
+			//graphics.setStroke(new BasicStroke(10));
 			// set color Blue
 			graphics.setColor(Color.BLUE);
 			// draw node
-			graphics.fillOval(src.ix(), src.iy(), 10, 10);
+			graphics.fillOval(src.ix(), src.iy(), 15, 15);
 			// draw node key
 			graphics.drawString(String.valueOf(node.getKey()), src.ix(), src.iy()-5);
 			
@@ -60,18 +62,22 @@ public class GUIHandler {
 				// set color Red
 				graphics.setColor(Color.RED);
 				// draw line
-				graphics.drawLine(src.ix()+5, src.iy()+5, dest.ix()+5, dest.iy()+5);
+				graphics.drawLine(src.ix()+8, src.iy()+8, dest.ix()+5, dest.iy()+5);
 				int xCenterCoord = (src.ix() + dest.ix() - 10)/2;
 				int yCenterCoord = (src.iy() + dest.iy() - 5)/2;
 				graphics.setColor(Color.BLACK);
 				graphics.drawString(String.valueOf(edge.getWeight()), xCenterCoord, yCenterCoord);
+				graphics.setColor(Color.YELLOW);
+				int xCoord = (int)(src.ix()*0.1+dest.ix()*0.9);
+				int yCoord = (int)(src.iy()*0.1+dest.iy()*0.9);
+				graphics.fillOval(xCoord, yCoord, 15, 15);
 				}
 			}
 		}
 	}
 	
 	
-	public void drawPath(Graphics graphics) {
+	public void drawPath(Graphics2D graphics) {
 		if(this.nodes == null) return;
 		for(node_data node : nodes) {
 			Collection<edge_data> edges = graph.getE(node.getKey());
@@ -178,16 +184,16 @@ public class GUIHandler {
 	
 	
 	public void load(JFrame frame) {
-		FileDialog chooser = new FileDialog(frame ,"Load graph from file", FileDialog.LOAD);
-        chooser.setVisible(true);
-        String filename = chooser.getFile();
-        if (filename != null) {
-            Graph_Algo temp = new Graph_Algo();
-            temp.init(chooser.getDirectory() + File.separator + chooser.getFile());
-            graph = (DGraph) temp.copy();
-        	graphAlgo = temp;;
-            
-        }
+		FileDialog chooser = new FileDialog(frame, "Load graph from file", FileDialog.LOAD);
+		chooser.setVisible(true);
+		String filename = chooser.getFile();
+		if (filename != null) {
+			Graph_Algo temp = new Graph_Algo();
+			temp.init(chooser.getDirectory() + File.separator + chooser.getFile());
+			graph = (DGraph) temp.copy();
+			graphAlgo = temp;
+
+		}
 	}
 	
 	
