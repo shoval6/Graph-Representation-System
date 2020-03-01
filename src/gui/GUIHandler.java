@@ -155,6 +155,16 @@ public class GUIHandler {
 	}
 	
 	
+	public void load() {
+		JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView());
+		jfc.setDialogTitle("Load graph ...");
+		int userSelection = jfc.showOpenDialog(null);
+		if(userSelection == JFileChooser.APPROVE_OPTION) {
+			graphAlgo.init(jfc.getSelectedFile().getAbsolutePath());
+		}
+	}
+	
+	
 	public void calcNodePosition(Node node) {
 		double x = X_COORD + (node.getLocation().ix()*20)-5;
 		double y = Y_COORD - (node.getLocation().iy()*20)+5;
