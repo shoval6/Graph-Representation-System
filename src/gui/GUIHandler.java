@@ -7,7 +7,9 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileSystemView;
 
 import algorithms.Graph_Algo;
 import algorithms.graph_algorithms;
@@ -140,6 +142,18 @@ public class GUIHandler {
 		if(coll == null)
 			JOptionPane.showMessageDialog(null, "There is no path between the nodes");
 	}
+	
+	
+	public void save() {
+		JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView());
+		jfc.setDialogTitle("Save graph ...");
+		int userSelection = jfc.showSaveDialog(null);
+		if(userSelection == JFileChooser.APPROVE_OPTION) {
+			graphAlgo.save(jfc.getSelectedFile().getAbsolutePath());
+			JOptionPane.showMessageDialog(null, "The file saved successfully");
+		}
+	}
+	
 	
 	public void calcNodePosition(Node node) {
 		double x = X_COORD + (node.getLocation().ix()*20)-5;
