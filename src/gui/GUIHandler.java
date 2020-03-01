@@ -119,6 +119,15 @@ public class GUIHandler {
 	}
 	
 	
+	public void shortestPath() {
+		String nodeSrc = JOptionPane.showInputDialog("Enter node source number");
+		String nodeDest = JOptionPane.showInputDialog("Enter node destination number");
+		this.coll = graphAlgo.shortestPath(Integer.parseInt(nodeSrc), Integer.parseInt(nodeDest));
+		if(this.coll == null)
+			JOptionPane.showMessageDialog(null, "There is no path between "+nodeSrc+" -> "+nodeDest);
+	}
+	
+	
 	public void calcNodePosition(Node node) {
 		double x = X_COORD + (node.getLocation().ix()*20)-5;
 		double y = Y_COORD - (node.getLocation().iy()*20)+5;
