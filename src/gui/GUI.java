@@ -19,6 +19,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
 
 class Panel extends JPanel{
@@ -216,9 +217,9 @@ public class GUI implements ActionListener {
 		String stringIdentifier = e.getActionCommand();
 		
 		switch(stringIdentifier) {
-		case "Load": GUIHandler.guiHandler.load();
+		case "Load": GUIHandler.guiHandler.load(this.frame);
 		break;
-		case "Save": GUIHandler.guiHandler.save();
+		case "Save": GUIHandler.guiHandler.save(this.frame);
 		break;
 		case "Add Node": GUIHandler.guiHandler.addNode();
 		break;
@@ -247,31 +248,15 @@ public class GUI implements ActionListener {
 				jpanel.setFlag("shortestPath");
 			if(stringIdentifier.equals("TSP"))
 				jpanel.setFlag("TSP");
-				jpanel.repaint();
 		}
-		
+		jpanel.repaint();
+
 	}
 	
 	
 
 	public static void main(String[] args) {
 		
-	    try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedLookAndFeelException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	     
 		GUI gui = new GUI();
 		
 	
