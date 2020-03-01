@@ -216,25 +216,25 @@ public class GUI implements ActionListener {
 		String stringIdentifier = e.getActionCommand();
 		
 		switch(stringIdentifier) {
-//		case "Load": GUIHandler.guiHandler.load();
-//		break;
-//		case "Save": GUIHandler.guiHandler.save();
-//		break;
+		case "Load": GUIHandler.guiHandler.load();
+		break;
+		case "Save": GUIHandler.guiHandler.save();
+		break;
 		case "Add Node": GUIHandler.guiHandler.addNode();
 		break;
 		case "Add Edge": GUIHandler.guiHandler.addEdge();
 		break;
 		case "Remove Node": GUIHandler.guiHandler.removeNode();
 		break;
-//		case "Remove Edge": GUIHandler.guiHandler.removeEdge();
-//		break:
-//		case "isConnected": GUIHandler.guiHandler.isConnected();
-//		break;
-//		case "shortestPathDist": GUIHandler.guiHandler.shortestPathDist();
-//		break;
-//		case "shortestPath": GUIHandler.guiHandler.shortestPath();
-//		break;
-//		case "TSP": GUIHandler.guiHandler.TSP();
+		case "Remove Edge": GUIHandler.guiHandler.removeEdge();
+		break;
+		case "isConnected": GUIHandler.guiHandler.isConnected();
+		break;
+		case "shortestPathDist": GUIHandler.guiHandler.shortestPathDist();
+		break;
+		case "shortestPath": GUIHandler.guiHandler.shortestPath();
+		break;
+		case "TSP": GUIHandler.guiHandler.TSP();
 		
 		
 		}
