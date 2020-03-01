@@ -24,12 +24,12 @@ public class GUIHandler {
 	public static GUIHandler guiHandler = new GUIHandler();
 	private graph_algorithms graphAlgo;
 	private DGraph graph;
-	private Collection<node_data> coll;
+	private Collection<node_data> nodes;
 	final int X_COORD = 60;
 	final int Y_COORD = 720;
 	
 	public GUIHandler() {
-		coll = null;
+		nodes = null;
 		graph = new DGraph();
 		graphAlgo = new Graph_Algo();
 		graphAlgo.init(graph);
@@ -60,6 +60,22 @@ public class GUIHandler {
 				graphics.setColor(Color.BLACK);
 				graphics.drawString(String.valueOf(edge.getWeight()), xCenterCoord, yCenterCoord);
 				}
+			}
+		}
+	}
+	
+	
+	public void drawPath(Graphics graphics) {
+		if(this.nodes == null) return;
+		for(node_data node : nodes) {
+			Collection<edge_data> edges = graph.getE(node.getKey());
+			for(edge_data edge : edges) {
+				Point3D src = node.getLocation();
+				Point3D dest = graph.getNode(edge.getDest()).getLocation();
+				// set color Green
+				graphics.setColor(Color.GREEN);
+				// draw line
+				graphics.drawLine(src.ix()+5, src.iy()+5, dest.ix()+5, dest.iy()+5);
 			}
 		}
 	}
@@ -126,8 +142,8 @@ public class GUIHandler {
 	public void shortestPath() {
 		String nodeSrc = JOptionPane.showInputDialog("Enter node source number");
 		String nodeDest = JOptionPane.showInputDialog("Enter node destination number");
-		this.coll = graphAlgo.shortestPath(Integer.parseInt(nodeSrc), Integer.parseInt(nodeDest));
-		if(this.coll == null)
+		this.nodes = graphAlgo.shortestPath(Integer.parseInt(nodeSrc), Integer.parseInt(nodeDest));
+		if(this.nodes == null)
 			JOptionPane.showMessageDialog(null, "There is no path between "+nodeSrc+" -> "+nodeDest);
 	}
 	
@@ -138,8 +154,8 @@ public class GUIHandler {
 		List<Integer> targets = new LinkedList<>();
 		for(int i=0; i<split.length; i++)
 			targets.add(Integer.parseInt(split[i]));
-		this.coll = graphAlgo.TSP(targets);
-		if(coll == null)
+		this.nodes = graphAlgo.TSP(targets);
+		if(nodes == null)
 			JOptionPane.showMessageDialog(null, "There is no path between the nodes");
 	}
 	
