@@ -18,12 +18,11 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
-import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
-import javax.swing.UnsupportedLookAndFeelException;
+
 
 class Panel extends JPanel{
 	
+	private static final long serialVersionUID = 1L;
 	private String removeFlag; 
 	
 	public Panel() {
@@ -109,11 +108,9 @@ public class GUI implements ActionListener {
 	
 	private JFrame frame;
 	private Panel jpanel;
-	private int modeCount;
 	
 	public GUI() {
 		this.jpanel = new Panel();
-		this.modeCount = GUIHandler.guiHandler.getMC();
 		initFrame();
 		initMenu();
 	}
@@ -122,15 +119,14 @@ public class GUI implements ActionListener {
 		this.frame = new JFrame("Graph-Represenation");
 		this.frame.setSize(1400, 800);
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.frame.getContentPane().add(this.jpanel);
 		this.frame.setVisible(true);
 		this.frame.setLocationRelativeTo(null);
-		this.frame.getContentPane().add(jpanel);
 	}
 
 	private void initMenu() {
 
 		JMenuBar menuBar = new JMenuBar();
-		this.frame.setJMenuBar(menuBar);
 
 		//////////////////
 		//// File Menu ///
@@ -210,6 +206,7 @@ public class GUI implements ActionListener {
 		menuBar.add(file);
 		menuBar.add(edit);
 		menuBar.add(algorithms);
+		this.frame.setJMenuBar(menuBar);
 
 	}
 	
