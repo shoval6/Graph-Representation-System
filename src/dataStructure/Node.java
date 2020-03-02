@@ -10,14 +10,14 @@ public class Node implements node_data,Serializable {
 	private double weight;
 	private String info;
 	private Point3D location;
-	public static int keyCount = 1;
+	//public static int keyCount = 1;
 	private static final long serialVersionUID = 1L;
 
 	
 	
 	// default constructor
 	public Node(){
-		this.key = keyCount++;
+		this.key = 0;
 		this.tag = 0;
 		this.weight = 0;
 		this.info = "";
@@ -25,7 +25,7 @@ public class Node implements node_data,Serializable {
 	}
 	
 	public Node(Point3D p) {
-		this.key = keyCount++;
+		this.key = 0;
 		this.tag = 0;
 		this.weight = 0;
 		this.info = "";
@@ -39,6 +39,10 @@ public class Node implements node_data,Serializable {
 		this.weight = n.weight;
 		this.info = n.info;
 		this.location = n.location;
+	}
+	
+	public void setKey(int key) {
+		this.key = key;
 	}
 	
 	@Override
