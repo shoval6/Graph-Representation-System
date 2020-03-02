@@ -93,14 +93,15 @@ class Panel extends JPanel{
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON); 
         initAxis(g2d);
         GUIHandler.guiHandler.draw(g2d);
+        
         if(getFlag() != null) {
         if(getFlag().equals("remove")) 
         	setBackground(Color.WHITE);
         if(getFlag().equals("shortestPath") || getFlag().equals("TSP"))
-        	GUIHandler.guiHandler.drawPath(g2d);
-        setFlag(null);
-        	
+        	GUIHandler.guiHandler.drawPath(g2d);   	
         }
+        
+        setFlag(null);
     }
 }
 
@@ -240,15 +241,13 @@ public class GUI implements ActionListener {
 		
 		}
 				
-		if(modeCount != GUIHandler.guiHandler.getMC()) {
-			modeCount = GUIHandler.guiHandler.getMC();
-			if(stringIdentifier.equals("Remove Node") || stringIdentifier.equals("Remove Edge"))
-				jpanel.setFlag("remove");
-			if(stringIdentifier.equals("shortestPath"))
-				jpanel.setFlag("shortestPath");
-			if(stringIdentifier.equals("TSP"))
-				jpanel.setFlag("TSP");
-		}
+		if (stringIdentifier.equals("Remove Node") || stringIdentifier.equals("Remove Edge"))
+			jpanel.setFlag("remove");
+		if (stringIdentifier.equals("shortestPath"))
+			jpanel.setFlag("shortestPath");
+		if (stringIdentifier.equals("TSP"))
+			jpanel.setFlag("TSP");
+
 		jpanel.repaint();
 
 	}
