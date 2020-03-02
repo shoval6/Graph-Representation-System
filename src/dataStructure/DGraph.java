@@ -8,13 +8,14 @@ import java.util.Map;
 
 public class DGraph implements graph,Serializable{
 	
-	private int edgesCount , modeCount;
+	private int edgesCount , modeCount , nodesCount;
 	private HashMap<Integer,node_data> vertices;
 	private HashMap<Integer,HashMap<Integer,edge_data>> edges;
 	private static final long serialVersionUID = 1L;
 
 	
 	public DGraph(){
+		this.nodesCount = 1;
 		this.edgesCount = 0;
 		this.modeCount = 0;
 		this.vertices = new HashMap<>();
@@ -55,6 +56,7 @@ public class DGraph implements graph,Serializable{
 	@Override
 	public void addNode(node_data n) {
 		this.vertices.put(n.getKey(), n);
+		n.setKey(this.nodesCount++);
 		modeCount++;
 	}
 
