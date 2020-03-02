@@ -190,5 +190,13 @@ public class DGraph implements graph,Serializable{
 	public int getMC() {
 		return this.modeCount;
 	}
+	
+	public int getNodesCount() {
+		return this.nodesCount;
+	}
+	
+	public void setNodesCount(int init) {
+		this.nodesCount = init;
+	}
 
 }
