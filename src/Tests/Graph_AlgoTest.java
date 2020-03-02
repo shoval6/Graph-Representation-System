@@ -26,8 +26,13 @@ class Graph_AlgoTest {
 
 		points[0] = new Point3D(0, 0);
 		points[1] = new Point3D(1, 1);
+		
 		nodes[0] = new Node(points[0]);
 		nodes[1] = new Node(points[1]);
+		
+		nodes[0].setKey(1);
+		nodes[1].setKey(2);
+		
 
 		dg.addNode(nodes[0]);
 		dg.addNode(nodes[1]);
@@ -108,13 +113,19 @@ class Graph_AlgoTest {
 		points[0] = new Point3D(0, 0);
 		points[1] = new Point3D(1, 1);
 		points[2] = new Point3D(2, 2);
+		
 		nodes[0] = new Node(points[0]);
 		nodes[1] = new Node(points[1]);
 		nodes[2] = new Node(points[2]);
 
+		nodes[0].setKey(1);
+		nodes[1].setKey(2);
+		nodes[2].setKey(3);
+		
 		dg.addNode(nodes[0]);
 		dg.addNode(nodes[1]);
 		dg.addNode(nodes[2]);
+		
 
 		dg.connect(nodes[0].getKey(), nodes[1].getKey(), 10);
 		dg.connect(nodes[0].getKey(), nodes[2].getKey(), 5);
@@ -185,6 +196,13 @@ class Graph_AlgoTest {
 		nodes[3] = new Node(points[3]);
 		nodes[4] = new Node(points[4]);
 		nodes[5] = new Node(points[5]);
+		
+		nodes[0].setKey(1);
+		nodes[1].setKey(2);
+		nodes[2].setKey(3);
+		nodes[3].setKey(4);
+		nodes[4].setKey(5);
+		nodes[5].setKey(6);
 
 		dg.addNode(nodes[0]);
 		dg.addNode(nodes[1]);
@@ -227,6 +245,13 @@ class Graph_AlgoTest {
 		nodes[3] = new Node(points[3]);
 		nodes[4] = new Node(points[4]);
 		nodes[5] = new Node(points[5]);
+		
+		nodes[0].setKey(1);
+		nodes[1].setKey(2);
+		nodes[2].setKey(3);
+		nodes[3].setKey(4);
+		nodes[4].setKey(5);
+		nodes[5].setKey(6);
 
 		dg.addNode(nodes[0]);
 		dg.addNode(nodes[1]);
@@ -284,6 +309,12 @@ class Graph_AlgoTest {
 		nodes[2] = new Node(points[2]);
 		nodes[3] = new Node(points[3]);
 		nodes[4] = new Node(points[4]);
+		
+		nodes[0].setKey(1);
+		nodes[1].setKey(2);
+		nodes[2].setKey(3);
+		nodes[3].setKey(4);
+		nodes[4].setKey(5);
 
 		dg.addNode(nodes[0]);
 		dg.addNode(nodes[1]);
@@ -346,6 +377,13 @@ class Graph_AlgoTest {
 		nodes[3] = new Node(points[3]);
 		nodes[4] = new Node(points[4]);
 		nodes[5] = new Node(points[5]);
+		
+		nodes[0].setKey(1);
+		nodes[1].setKey(2);
+		nodes[2].setKey(3);
+		nodes[3].setKey(4);
+		nodes[4].setKey(5);
+		nodes[5].setKey(6);
 
 		dg1.addNode(nodes[0]);
 		dg1.addNode(nodes[1]);
