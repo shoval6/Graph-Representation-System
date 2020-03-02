@@ -41,6 +41,7 @@ public class Node implements node_data,Serializable {
 		this.location = n.location;
 	}
 	
+	@Override
 	public void setKey(int key) {
 		this.key = key;
 	}
