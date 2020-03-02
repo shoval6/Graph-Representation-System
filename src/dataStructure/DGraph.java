@@ -191,10 +191,12 @@ public class DGraph implements graph,Serializable{
 		return this.modeCount;
 	}
 	
+	@Override
 	public int getNodesCount() {
 		return this.nodesCount;
 	}
 	
+	@Override
 	public void setNodesCount(int init) {
 		this.nodesCount = init;
 	}

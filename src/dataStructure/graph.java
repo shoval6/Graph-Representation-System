@@ -83,4 +83,16 @@ public interface graph {
  * @return
  */
 	public int getMC();
+	
+	/**
+	 * set the count of the nodes
+	 * @param init
+	 */
+	public void setNodesCount(int init);
+	
+	/**
+	 * return the count number of th nodes
+	 * @return
+	 */
+	public int getNodesCount();
 }
