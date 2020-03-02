@@ -8,6 +8,12 @@ import utils.Point3D;
  *
  */
 public interface node_data {
+	
+	
+	/** Allows changing this node's key.
+	 * @param p - new key  (id) of this node.
+	 */
+	public void setKey();
 	/**
 	 * Return the key (id) associated with this node.
 	 * @return
