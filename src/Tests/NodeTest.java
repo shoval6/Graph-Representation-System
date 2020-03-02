@@ -32,6 +32,14 @@ class NodeTest {
 		nodesTest[5] = new Node(pointsTest[5]);
 		nodesTest[6] = new Node(pointsTest[6]);
 		
+		nodesTest[0].setKey(1);
+		nodesTest[1].setKey(2);
+		nodesTest[2].setKey(3);
+		nodesTest[3].setKey(4);
+		nodesTest[4].setKey(5);
+		nodesTest[5].setKey(6);
+		nodesTest[6].setKey(7);
+		
 	}
     
     @Test
