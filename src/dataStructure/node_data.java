@@ -13,7 +13,7 @@ public interface node_data {
 	/** Allows changing this node's key.
 	 * @param p - new key  (id) of this node.
 	 */
-	public void setKey();
+	public void setKey(int key);
 	/**
 	 * Return the key (id) associated with this node.
 	 * @return
