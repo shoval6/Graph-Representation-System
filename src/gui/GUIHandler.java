@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.FileDialog;
 import java.awt.Graphics2D;
@@ -10,12 +9,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.filechooser.FileSystemView;
 
 import algorithms.Graph_Algo;
 import algorithms.graph_algorithms;
@@ -24,7 +19,6 @@ import dataStructure.Node;
 import dataStructure.edge_data;
 import dataStructure.node_data;
 import utils.Point3D;
-import utils.StdDraw;
 
 public class GUIHandler {
 
@@ -62,7 +56,7 @@ public class GUIHandler {
 				// set color Red
 				graphics.setColor(Color.RED);
 				// draw line
-				graphics.drawLine(src.ix()+8, src.iy()+8, dest.ix()+5, dest.iy()+5);
+				graphics.drawLine(src.ix()+5, src.iy()+5, dest.ix()+5, dest.iy()+5);
 				int xCenterCoord = (src.ix() + dest.ix() - 10)/2;
 				int yCenterCoord = (src.iy() + dest.iy() - 5)/2;
 				graphics.setColor(Color.BLACK);
@@ -85,7 +79,7 @@ public class GUIHandler {
 				// set color Green
 				graphics.setColor(Color.GREEN);
 				// draw line
-				graphics.drawLine(src.ix()+8, src.iy()+8, dest.ix()+5, dest.iy()+5);
+				graphics.drawLine(src.ix()+5, src.iy()+5, dest.ix()+5, dest.iy()+5);
 			
 		}
 	}
