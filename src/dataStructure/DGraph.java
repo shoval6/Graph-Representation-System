@@ -55,8 +55,8 @@ public class DGraph implements graph,Serializable{
 	 */
 	@Override
 	public void addNode(node_data n) {
-		this.vertices.put(n.getKey(), n);
 		n.setKey(this.nodesCount++);
+		this.vertices.put(n.getKey(), n);
 		modeCount++;
 	}
 
