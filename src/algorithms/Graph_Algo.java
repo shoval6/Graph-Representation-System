@@ -253,20 +253,25 @@ public class Graph_Algo implements graph_algorithms,Serializable{
 
 	@Override
 	public graph copy() {
-		graph g = new DGraph();
+		
+		DGraph dg =  new DGraph();
+		
 		for (node_data n : this.algo.getV()) {
 			node_data temp = new Node((Node) n);
-			g.addNode(temp);
+			dg.addNode(temp);
 		}
-		for (node_data n : g.getV()) {
+		for (node_data n : dg.getV()) {
 			Collection<edge_data> coll = this.algo.getE(n.getKey());
 			if(coll!=null) {
 				for (edge_data e : this.algo.getE(n.getKey())) {
 					edge_data temp = new Edge((Edge) e);
-					g.connect(temp.getSrc(), temp.getDest(), temp.getWeight());
+					dg.connect(temp.getSrc(), temp.getDest(), temp.getWeight());
 				}
 			}
 		}
+		
+		dg.setNodesCount(this.algo.getNodesCount());
+		graph g = dg;
 		return g;
 	}
 	
