@@ -39,6 +39,14 @@ class DGraphTest {
 		nodes[5] = new Node(points[5]);
 		nodes[6] = new Node(points[6]);
 		
+		nodes[0].setKey(1);
+		nodes[1].setKey(2);
+		nodes[2].setKey(3);
+		nodes[3].setKey(4);
+		nodes[4].setKey(5);
+		nodes[5].setKey(6);
+		nodes[6].setKey(7);
+		
 		for(int i=0; i<nodes.length; i++) {
 			g.addNode(nodes[i]);
 		}
@@ -98,6 +106,10 @@ class DGraphTest {
 		
 		nodes[0] = new Node(points[0]);
 		nodes[1] = new Node(points[1]);
+		
+		nodes[0].setKey(8);
+		nodes[1].setKey(9);
+		
 
 		for(int i=0; i<nodes.length; i++) {
 			g.addNode(nodes[i]);
@@ -142,6 +154,10 @@ class DGraphTest {
         nodes[0] = new Node(points[0]);
         nodes[1] = new Node(points[1]);
         nodes[2] = new Node(points[2]);
+        
+        nodes[0].setKey(1);
+		nodes[1].setKey(2);
+		nodes[2].setKey(3);
 
         for(int i=0; i<nodes.length; i++){
             graph.addNode(nodes[i]);
@@ -188,6 +204,11 @@ class DGraphTest {
 		nodes[0] = new Node(points[0]);
 		nodes[1] = new Node(points[1]);
 		nodes[2] = new Node(points[2]);
+		
+		nodes[0].setKey(1);
+		nodes[1].setKey(2);
+		nodes[2].setKey(3);
+	
 
 		for (int i = 0; i < nodes.length; i++) {
 			graph.addNode(nodes[i]);
