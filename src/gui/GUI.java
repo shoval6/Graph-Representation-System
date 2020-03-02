@@ -124,8 +124,9 @@ public class GUI implements ActionListener {
 		this.frame = new JFrame("Graph-Represenation");
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.frame.getContentPane().add(this.jpanel,BorderLayout.CENTER);
-		this.frame.setLocationRelativeTo(null);
 		this.frame.pack();
+		this.frame.setLocationRelativeTo(null);
+
 	}
 
 	private void initMenu() {
