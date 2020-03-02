@@ -31,7 +31,7 @@ public class GUIHandler {
 	public static GUIHandler guiHandler = new GUIHandler();
 	private graph_algorithms graphAlgo;
 	private DGraph graph;
-	private Collection<node_data> nodes;
+	private List<node_data> nodes;
 	final int X_COORD = 60;
 	final int Y_COORD = 720;
 	
@@ -79,19 +79,16 @@ public class GUIHandler {
 	
 	public void drawPath(Graphics2D graphics) {
 		if(this.nodes == null) return;
-		for(node_data node : nodes) {
-			Collection<edge_data> edges = graph.getE(node.getKey());
-			for(edge_data edge : edges) {
-				Point3D src = node.getLocation();
-				Point3D dest = graph.getNode(edge.getDest()).getLocation();
+		for(int i=0; i<this.nodes.size()-1;i++) {
+				Point3D src = graph.getNode(this.nodes.get(i).getKey()).getLocation();
+				Point3D dest = graph.getNode(this.nodes.get(i+1).getKey()).getLocation();
 				// set color Green
 				graphics.setColor(Color.GREEN);
 				// draw line
-				graphics.drawLine(src.ix()+5, src.iy()+5, dest.ix()+5, dest.iy()+5);
-			}
+				graphics.drawLine(src.ix()+8, src.iy()+8, dest.ix()+5, dest.iy()+5);
+			
 		}
 	}
-	
 	
 	public void addNode() {
 		String xCoord = JOptionPane.showInputDialog("Enter x coordinate between 1-65");
