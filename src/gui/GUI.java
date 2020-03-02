@@ -1,7 +1,9 @@
 package gui;
 
 import java.awt.BasicStroke;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -26,6 +28,7 @@ class Panel extends JPanel{
 	private String removeFlag; 
 	
 	public Panel() {
+		setPreferredSize(new Dimension(1400,800));
 		removeFlag = null;
 		setBackground(Color.WHITE); 
 	}
@@ -113,15 +116,16 @@ public class GUI implements ActionListener {
 		this.jpanel = new Panel();
 		initFrame();
 		initMenu();
+		this.frame.setVisible(true);
+
 	}
 	
 	private void initFrame() {
 		this.frame = new JFrame("Graph-Represenation");
-		this.frame.setSize(1400, 800);
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.frame.getContentPane().add(this.jpanel);
-		this.frame.setVisible(true);
+		this.frame.getContentPane().add(this.jpanel,BorderLayout.CENTER);
 		this.frame.setLocationRelativeTo(null);
+		this.frame.pack();
 	}
 
 	private void initMenu() {

@@ -196,8 +196,4 @@ public class GUIHandler {
 	}
 	
 	
-	public int getMC() {
-		return this.graph.getMC();
-	}
-	
 }
