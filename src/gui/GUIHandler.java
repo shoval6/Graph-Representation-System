@@ -194,6 +194,19 @@ public class GUIHandler {
 	}
 	
 	
+	public StringBuilder printPath() {
+		StringBuilder path = new StringBuilder();
+		path.append("[");
+		for (int i = 0; i < this.nodes.size(); i++) {
+			if (i != this.nodes.size() - 1)
+				path.append("" + this.nodes.get(i).getKey() + "->");
+			else 
+				path.append("" + this.nodes.get(i).getKey());
+		}
+		path.append("]");
+		return path;
+	}
+	
 	public void calcNodePosition(Node node) {
 		double x = X_COORD + (node.getLocation().ix()*20)-5;
 		double y = Y_COORD - (node.getLocation().iy()*20)+5;
