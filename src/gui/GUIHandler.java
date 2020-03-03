@@ -85,10 +85,16 @@ public class GUIHandler {
 	}
 	
 	public void addNode() {
-		String xCoord = JOptionPane.showInputDialog("Enter x coordinate between 1-65");
-		String yCoord = JOptionPane.showInputDialog("Enter y coordinate between 1-30");
+		String xCoord = JOptionPane.showInputDialog("Enter x coordinate between 0-65");
+		String yCoord = JOptionPane.showInputDialog("Enter y coordinate between 0-30");
 		if(xCoord == null || yCoord == null) return;
-		Point3D point = new Point3D(Double.parseDouble(xCoord),Double.parseDouble(yCoord));
+		double x = Double.parseDouble(xCoord);
+		double y = Double.parseDouble(yCoord);
+		if(x > 65 || y > 30 || x < 0 || y < 0) {
+			JOptionPane.showMessageDialog(null, "The entered coordinates are out of range!");
+			return;
+		}
+		Point3D point = new Point3D(x,y);
 		Node node = new Node(point);
 		calcNodePosition(node);
 		graph.addNode(node);
