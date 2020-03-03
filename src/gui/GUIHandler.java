@@ -25,16 +25,17 @@ public class GUIHandler {
 	public static GUIHandler guiHandler = new GUIHandler();
 	private graph_algorithms graphAlgo;
 	private DGraph graph;
-	private List<node_data> nodes;
+	private List<node_data> nodesPath;
 	final int X_COORD = 60;
 	final int Y_COORD = 720;
 	
 	public GUIHandler() {
-		nodes = null;
+		nodesPath = null;
 		graph = new DGraph();
 		graphAlgo = new Graph_Algo();
 		graphAlgo.init(graph);
 	}
+	
 	
 	public void draw(Graphics2D graphics) {
 		Iterator it1 = graph.getV().iterator();
@@ -72,10 +73,10 @@ public class GUIHandler {
 	
 	
 	public void drawPath(Graphics2D graphics) {
-		if(this.nodes == null) return;
-		for(int i=0; i<this.nodes.size()-1;i++) {
-				Point3D src = graph.getNode(this.nodes.get(i).getKey()).getLocation();
-				Point3D dest = graph.getNode(this.nodes.get(i+1).getKey()).getLocation();
+		if(this.nodesPath == null) return;
+		for(int i=0; i<this.nodesPath.size()-1;i++) {
+				Point3D src = graph.getNode(this.nodesPath.get(i).getKey()).getLocation();
+				Point3D dest = graph.getNode(this.nodesPath.get(i+1).getKey()).getLocation();
 				// set color Green
 				graphics.setColor(Color.GREEN);
 				// draw line
@@ -151,8 +152,8 @@ public class GUIHandler {
 	public void shortestPath() {
 		String nodeSrc = JOptionPane.showInputDialog("Enter node source number");
 		String nodeDest = JOptionPane.showInputDialog("Enter node destination number");
-		this.nodes = graphAlgo.shortestPath(Integer.parseInt(nodeSrc), Integer.parseInt(nodeDest));
-		if(this.nodes == null)
+		this.nodesPath = graphAlgo.shortestPath(Integer.parseInt(nodeSrc), Integer.parseInt(nodeDest));
+		if(this.nodesPath == null)
 			JOptionPane.showMessageDialog(null, "There is no path between "+nodeSrc+" -> "+nodeDest);
 		else {
 			StringBuilder result = printPath();
@@ -167,8 +168,8 @@ public class GUIHandler {
 		List<Integer> targets = new LinkedList<>();
 		for(int i=0; i<split.length; i++)
 			targets.add(Integer.parseInt(split[i]));
-		this.nodes = graphAlgo.TSP(targets);
-		if(nodes == null)
+		this.nodesPath = graphAlgo.TSP(targets);
+		if(nodesPath == null)
 			JOptionPane.showMessageDialog(null, "There is no path between the nodes");
 		else {
 			StringBuilder result = printPath();
@@ -205,11 +206,11 @@ public class GUIHandler {
 	public StringBuilder printPath() {
 		StringBuilder path = new StringBuilder();
 		path.append("[");
-		for (int i = 0; i < this.nodes.size(); i++) {
-			if (i != this.nodes.size() - 1)
-				path.append("" + this.nodes.get(i).getKey() + "->");
+		for (int i = 0; i < this.nodesPath.size(); i++) {
+			if (i != this.nodesPath.size() - 1)
+				path.append("" + this.nodesPath.get(i).getKey() + "->");
 			else 
-				path.append("" + this.nodes.get(i).getKey());
+				path.append("" + this.nodesPath.get(i).getKey());
 		}
 		path.append("]");
 		return path;
