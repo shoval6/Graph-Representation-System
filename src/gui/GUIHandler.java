@@ -154,6 +154,10 @@ public class GUIHandler {
 		this.nodes = graphAlgo.shortestPath(Integer.parseInt(nodeSrc), Integer.parseInt(nodeDest));
 		if(this.nodes == null)
 			JOptionPane.showMessageDialog(null, "There is no path between "+nodeSrc+" -> "+nodeDest);
+		else {
+			StringBuilder result = printPath();
+			JOptionPane.showMessageDialog(null, "The shortestPath between " + nodeSrc + " to " + nodeDest + " is: "+result);
+		}
 	}
 	
 	
@@ -166,6 +170,10 @@ public class GUIHandler {
 		this.nodes = graphAlgo.TSP(targets);
 		if(nodes == null)
 			JOptionPane.showMessageDialog(null, "There is no path between the nodes");
+		else {
+			StringBuilder result = printPath();
+			JOptionPane.showMessageDialog(null, "The TSP between the nodes is: "+result);
+		}
 	}
 	
 	
@@ -206,6 +214,7 @@ public class GUIHandler {
 		path.append("]");
 		return path;
 	}
+	
 	
 	public void calcNodePosition(Node node) {
 		double x = X_COORD + (node.getLocation().ix()*20)-5;
