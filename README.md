@@ -5,15 +5,15 @@ The system displays all the features by a GUI.<br />
 This OOP project also contains JUNIT5 Tests.<br />
  
 ## GUI
-The GUI is a coordinates system such that the user can creates customized graphs by choosing\
-X and Y coordinates for placing the vertices.<br />
+The GUI is a coordinates system such that the user can creates customized graphs<br /> 
+by choosing X and Y coordinates for placing the vertices.<br />
 
 ![enter image description here](https://github.com/shoval6/Graph-Representation-System/blob/master/img/1-img.png?raw=true)
 
 
 ## Run
 **First option :**  download and run the JAR file.<br />
-**Second option:** <br />
+**Second option:** 
 1. Download the project as a ZIP file.
 2. Open Eclipse.
 3. Go to File -> Open Project from File System or Archive.
@@ -74,7 +74,7 @@ This class implements the graph Interface.
 ### (~) Graph_Algo Class
 This class represents the "regular" Graph Theory algorithms,
 This class implements the graph_algorithms Interface.
-* graph - an instance of DGraph .
+* graph - an instance of DGraph .<br />
  **Main methods:**
 * init - initialize a graph from a file.
 * save - save a graph to a file.
@@ -84,7 +84,7 @@ This class implements the graph_algorithms Interface.
 * TSP - compute a relatively short path which visit each node in the targets List.
  
 ### (~) GUI 
-**GUI Class**
+**GUI Class**<br />
 This class manages all the view settings of the system.<br />
 The GUI was built in Java Swing.<br />
 **GUIHandler Class**<br />
