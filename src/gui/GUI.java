@@ -121,7 +121,7 @@ public class GUI implements ActionListener {
 	}
 	
 	private void initFrame() {
-		this.frame = new JFrame("Graph-Represenation");
+		this.frame = new JFrame("Graph-Represenation-System");
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.frame.getContentPane().add(this.jpanel,BorderLayout.CENTER);
 		this.frame.pack();
