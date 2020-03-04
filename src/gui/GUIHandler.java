@@ -57,7 +57,7 @@ public class GUIHandler {
 				// set color Red
 				graphics.setColor(Color.RED);
 				// draw line
-				graphics.drawLine(src.ix()+5, src.iy()+5, dest.ix()+5, dest.iy()+5);
+				graphics.drawLine(src.ix()+8, src.iy()+8, dest.ix()+8, dest.iy()+8);
 				int xCenterCoord = (src.ix() + dest.ix() - 10)/2;
 				int yCenterCoord = (src.iy() + dest.iy() - 5)/2;
 				graphics.setColor(Color.BLACK);
@@ -80,7 +80,7 @@ public class GUIHandler {
 				// set color Green
 				graphics.setColor(Color.GREEN);
 				// draw line
-				graphics.drawLine(src.ix()+5, src.iy()+5, dest.ix()+5, dest.iy()+5);
+				graphics.drawLine(src.ix()+8, src.iy()+8, dest.ix()+8, dest.iy()+8);
 			
 		}
 	}
